@@ -9,8 +9,56 @@ public class LinkedList {
             this.size = 0;
         }
 
-        // Find the Nt
-        // h node from end of Linked list
+        // Intersection of Two Linked Lists
+
+    public int getIntersectionNode(Node head1, Node head2){
+        if(head1 == null || head2 == null){
+            return -1;
+        }
+
+        Node l1 = head1;
+        Node l2 = head2;
+
+        while(l1 != l2){
+            l1 = l1 == null ? head2 : l1.next;
+            l2 = l2 == null ? head1 : l2.next;
+        }
+        if(l1 == null){
+            return -1;
+        }
+        return l1.value;
+    }
+
+        // Add two numbers
+
+    public Node addTwoNumbers(Node l1, Node l2) {
+        Node dummy = new Node();
+        Node temp = dummy;
+
+        int carry = 0;
+        while(l1 != null || l2 != null || carry == 1){
+            int sum = 0;
+            if(l1 != null){
+                sum += l1.value;
+                l1 = l1.next;
+            }
+
+            if(l2 != null){
+                sum += l2.value;
+                l2 = l2.next;
+            }
+
+            sum += carry;
+            carry = sum / 10;
+            int data = sum % 10;
+            Node node = new Node(data);
+            temp.next = node;
+            temp = temp.next;
+        }
+        head = dummy.next;
+        return dummy.next;
+    }
+        // Find the Nth node from end of Linked list
         public int getNthFromLast(Node head, int n)
         {
             // Your code here
