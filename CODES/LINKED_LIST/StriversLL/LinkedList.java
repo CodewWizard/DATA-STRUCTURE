@@ -9,8 +9,41 @@ public class LinkedList {
             this.size = 0;
         }
 
-        // Intersection of Two Linked Lists
+        // Reverse nodes in k grp
+    public Node reverseKGroup(Node node, int k) {
+        if(node == null || k == 1){
+            return node;
+        }
 
+        Node dummy = new Node(0);
+        dummy.next = node;
+        Node cur = dummy;
+        Node nxt = dummy;
+        Node pre = dummy;
+
+        int count = 0;
+        while(cur.next != null){
+            cur = cur.next;
+            count++;
+        }
+
+        while(count >= k){
+            cur = pre.next;
+            nxt = cur.next;
+            for(int i = 1; i < k; i++){
+                cur.next = nxt.next;
+                nxt.next = pre.next;
+                pre.next = nxt;
+                nxt = cur.next;
+            }
+            pre = cur;
+            count -= k;
+        }
+        head = dummy.next;
+        return head;
+    }
+
+        // Intersection of Two Linked Lists
     public int getIntersectionNode(Node head1, Node head2){
         if(head1 == null || head2 == null){
             return -1;
